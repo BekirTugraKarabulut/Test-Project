@@ -58,7 +58,11 @@ pipeline {
                     $ErrorActionPreference = "Stop"
 
                     Write-Host "== Önceki container'ları temizle =="
-                    docker-compose -f Not-App/docker-compose.yml down -v || Write-Host "Hiçbir şey kaldırılmadı."
+                    try {
+                        docker-compose -f Not-App/docker-compose.yml down -v
+                    } catch {
+                        Write-Host "Hiçbir şey kaldırılmadı."
+                    }
 
                     Write-Host "== DB ve Backend ayağa kaldırılıyor =="
                     docker-compose -f Not-App/docker-compose.yml up -d db app
@@ -93,6 +97,7 @@ pipeline {
                 ''')
             }
         }
+
 
     }
 }
