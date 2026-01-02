@@ -29,7 +29,7 @@ pipeline {
             post {
                 always {
                     dir('Not-App') {
-                        junit 'target/surefire-reports/*.xml'
+                        junit '**/target/surefire-reports/*.xml'
                     }
                 }
             }
@@ -45,7 +45,7 @@ pipeline {
             post {
                 always {
                     dir('Not-App') {
-                        junit 'target/failsafe-reports/*.xml'
+                        junit '**/target/failsafe-reports/*.xml'
                     }
                 }
             }
