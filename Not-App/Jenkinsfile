@@ -13,18 +13,22 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Build ediliyor...'
-                bat 'mvn clean package -DskipTests'
+                dir('Not-App') {
+                    bat 'mvn clean package -DskipTests'
+                }
             }
         }
 
         stage('Unit Tests') {
             steps {
                 echo 'Birim testler...'
-                bat 'mvn test'
+                dir('Not-App') {
+                    bat 'mvn test'
+                }
             }
             post {
                 always {
-                    junit 'target/surefire-reports/*.xml'
+                    junit 'Not-App/target/surefire-reports/*.xml'
                 }
             }
         }
@@ -32,11 +36,13 @@ pipeline {
         stage('Integration Tests') {
             steps {
                 echo 'Entegrasyon testleri...'
-                bat 'mvn verify -Pintegration-tests'
+                dir('Not-App') {
+                    bat 'mvn verify -Pintegration-tests'
+                }
             }
             post {
                 always {
-                    junit 'target/failsafe-reports/*.xml'
+                    junit 'Not-App/target/failsafe-reports/*.xml'
                 }
             }
         }
