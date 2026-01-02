@@ -24,7 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = NotProjesiApplication.class)
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
-class SatinAlinanlarControllerIntegrationTest {
+class SatinAlinanlarControllerIT {
 
     @Autowired
     private MockMvc mockMvc;

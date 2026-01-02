@@ -1,6 +1,5 @@
 package com.not_projesi.integration;
 
-import com.not_projesi.controller.impl.ProfilControllerImpl;
 import com.not_projesi.dto.DtoOgrenci;
 import com.not_projesi.dto.DtoOgrenciUI;
 import com.not_projesi.service.ProfilService;
@@ -8,7 +7,6 @@ import com.not_projesi.starter.NotProjesiApplication;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
@@ -27,7 +25,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @SpringBootTest(classes = NotProjesiApplication.class)
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
-class ProfilControllerIntegrationTest {
+class ProfilControllerIT {
 
     @Autowired
     private MockMvc mockMvc;

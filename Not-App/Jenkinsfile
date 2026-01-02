@@ -39,13 +39,13 @@ pipeline {
             steps {
                 echo 'Entegrasyon testleri...'
                 dir('Not-App') {
-                    bat 'mvn verify -Pintegration-tests'
+                    bat 'mvn verify'
                 }
             }
             post {
                 always {
                     dir('Not-App') {
-                        junit '**/target/surefire-reports/*.xml'
+                        junit '**/target/failsafe-reports/*.xml'
                     }
                 }
             }

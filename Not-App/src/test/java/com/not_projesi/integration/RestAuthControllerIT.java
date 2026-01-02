@@ -1,7 +1,6 @@
 package com.not_projesi.integration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.not_projesi.controller.impl.RestAuthControllerImpl;
 import com.not_projesi.dto.DtoOgrenci;
 import com.not_projesi.dto.RefreshTokenRequest;
 import com.not_projesi.jwt.AuthRequest;
@@ -12,7 +11,6 @@ import com.not_projesi.starter.NotProjesiApplication;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
@@ -27,7 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = NotProjesiApplication.class)
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
-class RestAuthControllerIntegrationTest {
+class RestAuthControllerIT {
 
     @Autowired
     private MockMvc mockMvc;
