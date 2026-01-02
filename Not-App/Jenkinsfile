@@ -28,7 +28,9 @@ pipeline {
             }
             post {
                 always {
-                    junit 'Not-App/target/surefire-reports/*.xml'
+                    dir('Not-App') {
+                        junit 'target/surefire-reports/*.xml'
+                    }
                 }
             }
         }
@@ -42,9 +44,10 @@ pipeline {
             }
             post {
                 always {
-                    junit 'Not-App/target/failsafe-reports/*.xml'
+                    dir('Not-App') {
+                        junit 'target/failsafe-reports/*.xml'
+                    }
                 }
             }
         }
-    }
 }
