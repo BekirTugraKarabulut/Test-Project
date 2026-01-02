@@ -1,6 +1,6 @@
 services:
   app:
-    build: .
+    build: ./Not-App
     container_name: not-app
     ports:
       - "8085:8085"
