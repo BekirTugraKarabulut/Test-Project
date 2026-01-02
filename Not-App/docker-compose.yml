@@ -1,0 +1,52 @@
+services:
+  app:
+    build: .
+    container_name: not-app
+    ports:
+      - "8085:8085"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/notProjesi
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: bekirjames58
+      FILE_UPLOAD_DIR: /app/uploads/
+      SERVER_ADDRESS: 0.0.0.0
+    volumes:
+      - ./uploads:/app/uploads
+    depends_on:
+      - db
+    networks:
+      - not-network
+
+  db:
+    image: postgres:16-alpine
+    container_name: not-db
+    environment:
+      POSTGRES_DB: notProjesi
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: bekirjames58
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - not-network
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: not-pgadmin
+    ports:
+      - "5050:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    depends_on:
+      - db
+    networks:
+      - not-network
+
+volumes:
+  postgres_data:
+
+networks:
+  not-network:
+    driver: bridge
