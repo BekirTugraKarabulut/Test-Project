@@ -116,6 +116,17 @@
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>3.2.5</version>
+
+				<configuration>
+					<useFile>true</useFile>
+					<reportsDirectory>${project.build.directory}/surefire-reports</reportsDirectory>
+					<reportFormat>xml</reportFormat>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
 					<annotationProcessorPaths>
