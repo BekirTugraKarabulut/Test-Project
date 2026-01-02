@@ -58,19 +58,23 @@ pipeline {
                     $ErrorActionPreference = "Stop"
 
                     Write-Host "== Önceki container'lar temizleniyor =="
-                    & docker compose -f Not-App/docker-compose.yml down -v || Write-Host "Önceki container yok, devam ediliyor"
+                    try {
+                        docker compose -f Not-App/docker-compose.yml down -v
+                    } catch {
+                        Write-Host "Önceki container yok, devam ediliyor"
+                    }
 
                     Write-Host "== DB ve Backend ayağa kaldırılıyor =="
-                    & docker compose -f Not-App/docker-compose.yml up -d --build
+                    docker compose -f Not-App/docker-compose.yml up -d --build
 
-                    # Basit reachability kontrolü (container ayağa kalktı mı)
                     Write-Host "Backend container zaten çalışıyor, health check kaldırıldı."
 
                     Write-Host "== Container durumları =="
-                    & docker compose -f Not-App/docker-compose.yml ps
+                    docker compose -f Not-App/docker-compose.yml ps
                 ''')
             }
         }
+
 
     }
 }
