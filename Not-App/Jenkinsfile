@@ -45,7 +45,7 @@ pipeline {
             post {
                 always {
                     dir('Not-App') {
-                        junit '**/target/failsafe-reports/*.xml'
+                        junit '**/target/surefire-reports/*.xml'
                     }
                 }
             }
