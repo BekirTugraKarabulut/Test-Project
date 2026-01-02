@@ -51,29 +51,31 @@ pipeline {
             }
         }
 
-        stage('5 - Run System in Docker') {
-            steps {
-                echo '========== Docker Compose ile sistem ayağa kaldırılıyor =========='
-                powershell(script: '''
-                    $ErrorActionPreference = "Stop"
+stage('5 - Run System in Docker') {
+    steps {
+        echo '========== Docker Compose ile sistem ayağa kaldırılıyor =========='
 
-                    Write-Host "== Önceki container'lar temizleniyor =="
-                    try {
-                        docker compose -f Not-App/docker-compose.yml down -v
-                    } catch {
-                        Write-Host "Önceki container yok, devam ediliyor"
-                    }
+        dir('..') {
+            powershell(script: '''
+                $ErrorActionPreference = "Stop"
 
-                    Write-Host "== DB ve Backend ayağa kaldırılıyor =="
-                    docker compose -f Not-App/docker-compose.yml up -d --build
+                Write-Host "== Önceki container'lar temizleniyor =="
+                try {
+                    docker compose -f Not-App/docker-compose.yml down -v
+                } catch {
+                    Write-Host "Önceki container yok, devam ediliyor"
+                }
 
-                    Write-Host "Backend container zaten çalışıyor, health check kaldırıldı."
+                Write-Host "== DB ve Backend ayağa kaldırılıyor =="
+                docker compose -f Not-App/docker-compose.yml up -d --build
 
-                    Write-Host "== Container durumları =="
-                    docker compose -f Not-App/docker-compose.yml ps
-                ''')
-            }
+                Write-Host "== Container durumları =="
+                docker compose -f Not-App/docker-compose.yml ps
+            ''')
         }
+    }
+}
+
 
 
     }
