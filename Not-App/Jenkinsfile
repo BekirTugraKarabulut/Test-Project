@@ -55,25 +55,25 @@ stage('5 - Run System in Docker') {
     steps {
         echo '========== Docker Compose ile sistem ayağa kaldırılıyor =========='
 
+        powershell(script: '''
+            $ErrorActionPreference = "Stop"
 
-            powershell(script: '''
-                $ErrorActionPreference = "Stop"
+            Write-Host "== Önceki container'lar temizleniyor =="
 
-                Write-Host "== Önceki container'lar temizleniyor =="
-                try {
-                    docker compose -f docker-compose.yml down -v
-                } catch {
-                    Write-Host "Önceki container yok, devam ediliyor"
-                }
+            # Belirli container'ları kaldır, hata varsa yoksay
+            docker rm -f not-db -ErrorAction SilentlyContinue
+            docker rm -f not-app -ErrorAction SilentlyContinue
+            docker rm -f not-pgadmin -ErrorAction SilentlyContinue
 
-                Write-Host "== DB ve Backend ayağa kaldırılıyor =="
-                docker compose -f docker-compose.yml up -d --build
+            Write-Host "== DB ve Backend ayağa kaldırılıyor =="
+            docker compose -f docker-compose.yml up -d --build
 
-                Write-Host "== Container durumları =="
-                docker compose -f docker-compose.yml ps
-            ''')
+            Write-Host "== Container durumları =="
+            docker compose -f docker-compose.yml ps
+        ''')
     }
 }
+
 
 
 
