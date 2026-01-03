@@ -33,6 +33,7 @@ public class SecurityConfig {
                                 "/authenticate",
                                 "/refreshtoken",
                                 "/register",
+                                "/rest/guncelle/profil-bilgi/{username}",
                                 "/rest/**",
                                 "/rest/sepet/**",
                                 "/ai/**",

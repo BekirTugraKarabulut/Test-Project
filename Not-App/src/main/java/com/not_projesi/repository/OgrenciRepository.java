@@ -17,4 +17,9 @@ public interface OgrenciRepository extends JpaRepository<Ogrenci, String> {
     Optional<Ogrenci> findByOgrenciEmailIgnoreCase(@Param("email") String email);
 
     Optional<Ogrenci> findByResetToken(String resetToken);
+
+    boolean existsByUsername(String username);
+
+    void deleteByUsername(String username);
+
 }
