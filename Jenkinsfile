@@ -51,27 +51,33 @@ pipeline {
             }
         }
 
-        stage('5 - Run System in Docker') {
-            steps {
-                echo '========== Docker Compose ile sistem ayağa kaldırılıyor =========='
+stage('5 - Run System in Docker') {
+    steps {
+        echo '========== Docker Compose ile sistem ayağa kaldırılıyor =========='
 
-                powershell(script: '''
-                    $ErrorActionPreference = "Stop"
+        powershell(script: '''
+            $ErrorActionPreference = "Stop"
 
-                    Write-Host "== Önceki container'lar temizleniyor =="
+            Write-Host "== Önceki container'lar kontrol ediliyor =="
 
-                    docker rm -f not-db -ErrorAction SilentlyContinue
-                    docker rm -f not-app -ErrorAction SilentlyContinue
-                    docker rm -f not-pgadmin -ErrorAction SilentlyContinue
+            # Container varsa sil
+            if ($(docker ps -aq -f name=not-db))     { docker rm -f not-db }
+            if ($(docker ps -aq -f name=not-app))    { docker rm -f not-app }
+            if ($(docker ps -aq -f name=not-pgadmin)) { docker rm -f not-pgadmin }
 
-                    Write-Host "== DB ve Backend ayağa kaldırılıyor =="
-                    docker compose -f docker-compose.yml up -d --build
+            Write-Host "== Önceki image'lar kontrol ediliyor =="
 
-                    Write-Host "== Container durumları =="
-                    docker compose -f docker-compose.yml ps
-                ''')
-            }
-        }
+            if ($(docker images -q not-app)) { docker rmi -f not-app }
+
+            Write-Host "== DB ve Backend ayağa kaldırılıyor =="
+
+            docker compose -f docker-compose.yml up -d --build
+
+            Write-Host "== Container durumları =="
+            docker compose -f docker-compose.yml ps
+        ''')
+    }
+}
 
         stage('Wait for System') {
             steps {
