@@ -17,7 +17,9 @@ function App() {
 
     const handleRegister = async () => {
         try {
-            const res = await fetch(`${WEBSOCKET_URL}register"`, {
+            const API_URL = process.env.REACT_APP_WEBSOCKET_URL;
+
+            const res = await fetch(`${API_URL}register"`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({

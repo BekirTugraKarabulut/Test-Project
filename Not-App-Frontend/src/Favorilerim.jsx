@@ -19,6 +19,7 @@ export default function Favorilerim() {
     useEffect(() => {
         const fetchFavoriler = async () => {
             try {
+                const API_URL = process.env.REACT_APP_API_URL;
                 const response = await fetch(`${API_URL}/begen/${user.username}`, {
                     headers: {
                         "Content-Type": "application/json",
@@ -43,6 +44,8 @@ export default function Favorilerim() {
     // Favoriden kaldır
     const removeFavori = async (begenId) => {
         try {
+            const API_URL = process.env.REACT_APP_API_URL;
+
             const response = await fetch(`${API_URL}/begen/delete/${begenId}`, {
                 method: "DELETE",
                 headers: {

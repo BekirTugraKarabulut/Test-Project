@@ -10,6 +10,8 @@ export default function Notlarim() {
     useEffect(() => {
         const fetchDersNotlari = async () => {
             try {
+                const API_URL = process.env.REACT_APP_API_URL;
+
                 const response = await fetch(
                     `${API_URL}ders-notlarim/list/${user?.username}`,
                     {

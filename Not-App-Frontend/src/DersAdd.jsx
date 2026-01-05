@@ -19,6 +19,8 @@ export default function DersEkle() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
+            const API_URL = process.env.REACT_APP_API_URL;
+
             const response = await fetch(`${API_URL}ders/save`, {
                 method: "POST",
                 headers: {

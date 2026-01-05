@@ -35,6 +35,8 @@ export default function DersNotuEkle() {
       formData.append("pdfFile", form.pdfFile);
       formData.append("pdfOnizlemeFile", form.pdfOnizlemeFile);
 
+      const API_URL = process.env.REACT_APP_API_URL;
+
       const response = await fetch(
           `${API_URL}/ders-notu/ekle`, {
             method: "POST",

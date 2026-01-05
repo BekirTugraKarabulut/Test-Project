@@ -33,6 +33,8 @@ export default function Login() {
         setError("");
 
         try {
+            const API_URL = process.env.REACT_WEBSOCKET_URL;
+
             const res = await fetch(`${API_URL}/authenticate`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
