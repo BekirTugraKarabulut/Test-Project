@@ -21,7 +21,7 @@
 	</properties>
 
 	<dependencies>
-
+		<!-- Spring Boot Core Dependencies -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -61,8 +61,7 @@
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
+			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
 
 		<!-- JWT -->
@@ -89,7 +88,13 @@
 			<version>2.7.0</version>
 		</dependency>
 
-		<!-- Test libs -->
+		<!-- Test Libraries -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-core</artifactId>
@@ -117,12 +122,7 @@
 			<scope>test</scope>
 		</dependency>
 
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-actuator</artifactId>
-		</dependency>
-
-		<!-- Selenium (UI / E2E) -->
+		<!-- Selenium for UI/E2E Tests -->
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
@@ -135,19 +135,30 @@
 	<build>
 		<plugins>
 
-			<!-- UNIT TESTS — *Test.java -->
+			<!-- Spring Boot Plugin (executable jar için) -->
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>3.4.3</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- Unit Tests -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>3.2.5</version>
-
 				<configuration>
 					<reportsDirectory>${project.build.directory}/surefire-reports</reportsDirectory>
-
 					<includes>
 						<include>**/*Test.java</include>
 					</includes>
-
 					<excludes>
 						<exclude>**/*IT.java</exclude>
 						<exclude>**/*IntegrationTest.java</exclude>
@@ -156,12 +167,11 @@
 				</configuration>
 			</plugin>
 
-			<!-- INTEGRATION TESTS — verify aşamasında -->
+			<!-- Integration Tests -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-failsafe-plugin</artifactId>
 				<version>3.2.5</version>
-
 				<executions>
 					<execution>
 						<id>integration-tests</id>
@@ -171,7 +181,6 @@
 						</goals>
 					</execution>
 				</executions>
-
 				<configuration>
 					<includes>
 						<include>**/*IT.java</include>
@@ -183,9 +192,8 @@
 		</plugins>
 	</build>
 
-	<!-- UI (SELENIUM / E2E) PROFİLİ -->
+	<!-- UI (SELENIUM / E2E) PROFILE -->
 	<profiles>
-
 		<profile>
 			<id>ui-tests</id>
 			<build>
@@ -202,7 +210,6 @@
 				</plugins>
 			</build>
 		</profile>
-
 	</profiles>
 
 </project>
