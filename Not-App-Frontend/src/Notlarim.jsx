@@ -10,10 +10,8 @@ export default function Notlarim() {
     useEffect(() => {
         const fetchDersNotlari = async () => {
             try {
-                const API_URL = process.env.REACT_APP_API_URL;
-
                 const response = await fetch(
-                    `${API_URL}ders-notlarim/list/${user?.username}`,
+                    `http://localhost:8085/rest/ders-notlarim/list/${user?.username}`,
                     {
                         headers: {
                             "Content-Type": "application/json",
@@ -55,7 +53,7 @@ export default function Notlarim() {
                             <p><strong>Not Türü:</strong> {not.notTuru?.notAdi || "-"}</p>
                             <div style={styles.links}>
                                 <a
-                                    href={not.dersNotPdf ? `${WEB_SOCKET}${not.dersNotPdf}` : "#"}
+                                    href={not.dersNotPdf ? `http://localhost:8085/${not.dersNotPdf}` : "#"}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     style={styles.link}
@@ -63,7 +61,7 @@ export default function Notlarim() {
                                     PDF
                                 </a>
                                 <a
-                                    href={not.dersNotPdfOnizleme ? `${WEB_SOCKET}${not.dersNotPdfOnizleme}` : "#"}
+                                    href={not.dersNotPdfOnizleme ? `http://localhost:8085/${not.dersNotPdfOnizleme}` : "#"}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     style={styles.link}

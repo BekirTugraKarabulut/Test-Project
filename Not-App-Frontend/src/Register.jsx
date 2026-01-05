@@ -24,11 +24,11 @@ export default function Register() {
     }, []);
 
     const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
-    const API_URL = process.env.REACT_APP_API_URL;
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const res = await fetch(`${API_URL}/register`, {
+            const res = await fetch("http://localhost:8085/register", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(form),

@@ -20,10 +20,8 @@ export default function ProfileUpdate() {
         e.preventDefault();
 
         try {
-            const API_URL = process.env.REACT_APP_API_URL;
-
             const response = await fetch(
-                `${API_URL}/guncelle/profil-bilgi/${storedUser.username}`,
+                `http://localhost:8085/rest/guncelle/profil-bilgi/${storedUser.username}`,
                 {
                     method: "PUT",
                     headers: {

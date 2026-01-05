@@ -17,9 +17,7 @@ function App() {
 
     const handleRegister = async () => {
         try {
-            const API_URL = process.env.REACT_APP_WEBSOCKET_URL;
-
-            const res = await fetch(`${API_URL}register"`, {
+            const res = await fetch("http://localhost:8085/register", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -41,7 +39,7 @@ function App() {
 
     const handleLogin = async () => {
         try {
-            const res = await fetch(`${WEBSOCKET_URL}authenticate`, {
+            const res = await fetch("http://localhost:8085/authenticate", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ username: loginUsername, ogrenciSifre: loginPassword }),
