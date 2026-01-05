@@ -19,7 +19,7 @@ export default function Favorilerim() {
     useEffect(() => {
         const fetchFavoriler = async () => {
             try {
-                const response = await fetch(`http://localhost:8085/rest/begen/${user.username}`, {
+                const response = await fetch(`${API_URL}/begen/${user.username}`, {
                     headers: {
                         "Content-Type": "application/json",
                         "Authorization": `Bearer ${localStorage.getItem("token")}`
@@ -43,7 +43,7 @@ export default function Favorilerim() {
     // Favoriden kaldır
     const removeFavori = async (begenId) => {
         try {
-            const response = await fetch(`http://localhost:8085/rest/begen/delete/${begenId}`, {
+            const response = await fetch(`${API_URL}/begen/delete/${begenId}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",

@@ -21,7 +21,7 @@ export default function ProfileUpdate() {
 
         try {
             const response = await fetch(
-                `http://localhost:8085/rest/guncelle/profil-bilgi/${storedUser.username}`,
+                `${API_URL}/guncelle/profil-bilgi/${storedUser.username}`,
                 {
                     method: "PUT",
                     headers: {

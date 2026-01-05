@@ -17,7 +17,7 @@ function App() {
 
     const handleRegister = async () => {
         try {
-            const res = await fetch("http://localhost:8085/register", {
+            const res = await fetch(`${WEBSOCKET_URL}register"`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -39,7 +39,7 @@ function App() {
 
     const handleLogin = async () => {
         try {
-            const res = await fetch("http://localhost:8085/authenticate", {
+            const res = await fetch(`${WEBSOCKET_URL}authenticate`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ username: loginUsername, ogrenciSifre: loginPassword }),

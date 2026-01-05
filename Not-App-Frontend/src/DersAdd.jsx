@@ -19,7 +19,7 @@ export default function DersEkle() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch("http://localhost:8085/rest/ders/save", {
+            const response = await fetch(`${API_URL}ders/save`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

@@ -33,7 +33,7 @@ export default function Login() {
         setError("");
 
         try {
-            const res = await fetch("http://localhost:8085/authenticate", {
+            const res = await fetch(`${API_URL}/authenticate`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(form),
@@ -48,8 +48,13 @@ export default function Login() {
             localStorage.setItem("token", authData.token);
 
             const userRes = await fetch(
-                `http://localhost:8085/rest/list/${form.username}`,
-                { headers: { "Authorization": `Bearer ${authData.token}` } }
+                `${API_URL}/user/${storedUser.username}`,
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${localStorage.getItem("token")}`,
+                    },
+                }
             );
 
             if (!userRes.ok) {

@@ -30,7 +30,7 @@ export default function Home() {
     useEffect(() => {
         const fetchDersNotlari = async () => {
             try {
-                const response = await fetch("http://localhost:8085/rest/ders-notu/list", {
+                const response = await fetch(`${API_URL}/ders-notu/list`, {
                     headers: {
                         "Content-Type": "application/json",
                         "Authorization": `Bearer ${localStorage.getItem("token")}`
@@ -54,7 +54,7 @@ export default function Home() {
 
     const handleLike = async (dersNotu) => {
         try {
-            const response = await fetch("http://localhost:8085/rest/ekle/begen", {
+            const response = await fetch(`${API_URL}/ekle/begen`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -83,7 +83,7 @@ export default function Home() {
 
     const handleUnlike = async (dersNotId, begenId) => {
         try {
-            const response = await fetch(`http://localhost:8085/rest/begen/delete/${begenId}`, {
+            const response = await fetch(`${API_URL}/begen/delete/${begenId}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
