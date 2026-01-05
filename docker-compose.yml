@@ -47,9 +47,7 @@ services:
       - not-network
 
   frontend:
-    build:
-      context: ./Not-App-Frontend
-      dockerfile: Dockerfile
+    build: ./Not-App-Frontend
     container_name: not-frontend
     ports:
       - "5173:80"
