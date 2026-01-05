@@ -4,9 +4,11 @@
 FROM node:20-alpine AS build
 WORKDIR /app
 
-COPY package*.json ./
+# package.json ve package-lock.json kopyala
+COPY ./package.json ./package-lock.json ./
 RUN npm install
 
+# Tüm frontend kaynaklarını kopyala
 COPY . .
 RUN npm run build
 
