@@ -71,7 +71,7 @@ pipeline {
         stage('Wait for System') {
             steps {
                 echo 'Sistem ayaga kalkıyor, 10 saniye bekleniyor...'
-                sleep time: 10, unit: 'SECONDS'
+                sleep time: 30, unit: 'SECONDS'
             }
         }
 
