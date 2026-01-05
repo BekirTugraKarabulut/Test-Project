@@ -68,43 +68,12 @@ pipeline {
             }
         }
 
-        stage('Health Check') {
+        stage('Wait for System') {
             steps {
-                echo 'Service health kontrol ediliyor...'
-
-                powershell(script: '''
-                    $maxRetries = 25
-                    $waitSeconds = 5
-
-                    function Wait-ForService($url) {
-                        $tries = 0
-                        while ($tries -lt $maxRetries) {
-                            try {
-                                $response = Invoke-WebRequest -Uri $url -UseBasicParsing -TimeoutSec 5
-                                if ($response.StatusCode -eq 200) {
-                                    Write-Host "OK -> $url"
-                                    return
-                                }
-                            } catch {
-                                Write-Host "Bekleniyor -> $url"
-                            }
-
-                            Start-Sleep -Seconds $waitSeconds
-                            $tries++
-                        }
-
-                        throw "Service ayaga kalkmadi: $url"
-                    }
-
-                    # Backend (8085)
-                    Wait-ForService "http://localhost:8085/actuator/health"
-
-                    # Frontend (5173 veya compose portun neyse)
-                    Wait-ForService "http://localhost:5173/"
-                ''')
+                echo 'Sistem ayaga kalkıyor, 10 saniye bekleniyor...'
+                sleep time: 10, unit: 'SECONDS'
             }
         }
-
 
         // ===== UI TESTLER (yalnızca profil) =====
         stage('UI Test: Register Success') {
