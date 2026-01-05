@@ -51,23 +51,18 @@ pipeline {
             }
         }
 
-        stage('5 - Run System in Docker') {
+        stage('Run System in Docker') {
             steps {
-                echo '========== Docker Compose ile sistem ayağa kaldırılıyor =========='
+                echo 'Docker Compose ile sistem ayağa kaldırılıyor...'
 
                 powershell(script: '''
                     $ErrorActionPreference = "Stop"
 
-                    Write-Host "== Önceki container'lar temizleniyor =="
+                    Write-Host "== Docker Compose UP =="
 
-                    docker rm -f not-db -ErrorAction SilentlyContinue
-                    docker rm -f not-app -ErrorAction SilentlyContinue
-                    docker rm -f not-pgadmin -ErrorAction SilentlyContinue
-
-                    Write-Host "== DB ve Backend ayağa kaldırılıyor =="
+                    # Burada hiçbir volume silinmez
                     docker compose -f docker-compose.yml up -d --build
 
-                    Write-Host "== Container durumları =="
                     docker compose -f docker-compose.yml ps
                 ''')
             }
@@ -80,8 +75,8 @@ pipeline {
             }
         }
 
-        // ===== UI TESTLER =====
-        stage('6.1 - UI Test: Register Success') {
+        // ===== UI TESTLER (yalnızca profil) =====
+        stage('UI Test: Register Success') {
             steps {
                 dir('Not-App') {
                     bat 'mvn test -Pui-tests -Dtest=RegisterUITest#shouldRegisterUser'
@@ -89,7 +84,7 @@ pipeline {
             }
         }
 
-        stage('6.2 - UI Test: Login Fail') {
+        stage('UI Test: Login Fail') {
             steps {
                 dir('Not-App') {
                     bat 'mvn test -Pui-tests -Dtest=LoginWrongUITest#shouldRegisterUserAndThenFailLogin'
@@ -97,7 +92,7 @@ pipeline {
             }
         }
 
-        stage('6.3 - UI Test: Login Success') {
+        stage('UI Test: Login Success') {
             steps {
                 dir('Not-App') {
                     bat 'mvn test -Pui-tests -Dtest=LoginSuccessUITest#shouldRegisterAndLoginUserSuccessfully'
@@ -105,7 +100,7 @@ pipeline {
             }
         }
 
-        stage('6.4 - UI Test: Profil Update') {
+        stage('UI Test: Profil Update') {
             steps {
                 dir('Not-App') {
                     bat 'mvn test -Pui-tests -Dtest=RegisterLoginProfileUpdateUITest#registerLoginAndUpdateProfile'
@@ -113,7 +108,7 @@ pipeline {
             }
         }
 
-        stage('6.5 - UI Test: Ders Note Add') {
+        stage('UI Test: Ders Note Add') {
             steps {
                 dir('Not-App') {
                     bat 'mvn test -Pui-tests -Dtest=DersNotuAddUITest#registerLoginAndAddDersNotu'
@@ -121,7 +116,7 @@ pipeline {
             }
         }
 
-        stage('6.6 - UI Test: Ders Note Add & Check') {
+        stage('UI Test: Ders Note Add & Check') {
             steps {
                 dir('Not-App') {
                     bat 'mvn test -Pui-tests -Dtest=DersNotuAddAndCheckUITest#registerLoginAddDersNotuAndCheckNotlarimThenLogout'
@@ -129,7 +124,7 @@ pipeline {
             }
         }
 
-        stage('6.7 - UI Test: Ders Add') {
+        stage('UI Test: Ders Add') {
             steps {
                 dir('Not-App') {
                     bat 'mvn test -Pui-tests -Dtest=DersAddUITest#registerLoginAddDersAndLogout'
@@ -137,7 +132,7 @@ pipeline {
             }
         }
 
-        stage('6.8 - UI Test: Begen Add') {
+        stage('UI Test: Begen Add') {
             steps {
                 dir('Not-App') {
                     bat 'mvn test -Pui-tests -Dtest=BegenAddUITest#loginAndLikeAndUnlikeDersNot'
@@ -145,7 +140,7 @@ pipeline {
             }
         }
 
-        stage('6.9 - UI Test: Begen List') {
+        stage('UI Test: Begen List') {
             steps {
                 dir('Not-App') {
                     bat 'mvn test -Pui-tests -Dtest=BegenListUITest#registerLoginLikeAndGoToFavorilerimAndLogout'
