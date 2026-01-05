@@ -75,7 +75,6 @@ pipeline {
             }
         }
 
-        // ===== UI TESTLER (yalnızca profil) =====
         stage('UI Test: Register Success') {
             steps {
                 dir('Not-App') {

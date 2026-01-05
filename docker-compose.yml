@@ -1,3 +1,5 @@
+version: "3.9"
+
 services:
   app:
     build: ./Not-App
@@ -46,8 +48,8 @@ services:
 
   frontend:
     build:
-      context: ./Not-App-Frontend
-      dockerfile: Dockerfile
+        context: ./Not-Frontend
+        dockerfile: Dockerfile
     container_name: not-frontend
     ports:
       - "5173:80"
