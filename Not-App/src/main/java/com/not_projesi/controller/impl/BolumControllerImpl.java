@@ -12,6 +12,7 @@ import java.util.List;
 @RequestMapping(path = "/rest")
 public class BolumControllerImpl implements IBolumController {
 
+
     @Autowired
     private IBolumService bolumService;
 
