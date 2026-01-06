@@ -19,6 +19,7 @@ import java.util.Optional;
 @Configuration
 public class AppConfig {
 
+
     @Autowired
     private OgrenciRepository ogrenciRepository;
 
