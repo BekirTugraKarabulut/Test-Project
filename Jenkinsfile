@@ -78,6 +78,7 @@ pipeline {
         stage('UI Test: Register Success') {
             steps {
                 dir('Not-App') {
+                    echo 'Kayıt Ol Selenium Testi Baslatiliyor...'
                     bat 'mvn test -Pui-tests -Dtest=RegisterUITest#shouldRegisterUser'
                 }
             }
@@ -86,6 +87,7 @@ pipeline {
         stage('UI Test: Login Fail') {
             steps {
                 dir('Not-App') {
+                    echo 'Login Başarısız Selenium Testi Baslatiliyor...'
                     bat 'mvn test -Pui-tests -Dtest=LoginWrongUITest#shouldRegisterUserAndThenFailLogin'
                 }
             }
@@ -94,6 +96,7 @@ pipeline {
         stage('UI Test: Login Success') {
             steps {
                 dir('Not-App') {
+                    echo 'Login Başarılı Selenium Testi Baslatiliyor...'
                     bat 'mvn test -Pui-tests -Dtest=LoginSuccessUITest#shouldRegisterAndLoginUserSuccessfully'
                 }
             }
@@ -102,6 +105,7 @@ pipeline {
         stage('UI Test: Profil Update') {
             steps {
                 dir('Not-App') {
+                    echo 'Profil Güncelleme Selenium Testi Baslatiliyor...'
                     bat 'mvn test -Pui-tests -Dtest=RegisterLoginProfileUpdateUITest#registerLoginAndUpdateProfile'
                 }
             }
@@ -110,6 +114,7 @@ pipeline {
         stage('UI Test: Ders Note Add') {
             steps {
                 dir('Not-App') {
+                    echo 'Not Ekleme Selenium Testi Baslatiliyor...'
                     bat 'mvn test -Pui-tests -Dtest=DersNotuAddUITest#registerLoginAndAddDersNotu'
                 }
             }
@@ -118,6 +123,7 @@ pipeline {
         stage('UI Test: Ders Note Add & Check') {
             steps {
                 dir('Not-App') {
+                    echo 'Not Ekleme ve Not Kontrolü Selenium Testi Baslatiliyor...'
                     bat 'mvn test -Pui-tests -Dtest=DersNotuAddAndCheckUITest#registerLoginAddDersNotuAndCheckNotlarimThenLogout'
                 }
             }
@@ -126,6 +132,7 @@ pipeline {
         stage('UI Test: Ders Add') {
             steps {
                 dir('Not-App') {
+                    echo 'Ders Ekleme Selenium Testi Baslatiliyor...'
                     bat 'mvn test -Pui-tests -Dtest=DersAddUITest#registerLoginAddDersAndLogout'
                 }
             }
@@ -134,6 +141,7 @@ pipeline {
         stage('UI Test: Begen Add') {
             steps {
                 dir('Not-App') {
+                    echo 'Begen Ekleme Selenium Testi Baslatiliyor...'
                     bat 'mvn test -Pui-tests -Dtest=BegenAddUITest#loginAndLikeAndUnlikeDersNot'
                 }
             }
@@ -142,9 +150,11 @@ pipeline {
         stage('UI Test: Begen List') {
             steps {
                 dir('Not-App') {
+                    echo 'Begen Listesi Selenium Testi Baslatiliyor...'
                     bat 'mvn test -Pui-tests -Dtest=BegenListUITest#registerLoginLikeAndGoToFavorilerimAndLogout'
                 }
             }
         }
+
     }
 }
